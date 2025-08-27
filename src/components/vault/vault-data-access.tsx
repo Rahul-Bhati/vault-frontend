@@ -117,14 +117,13 @@ export function useVaultProgramAccount() {
       } catch {
         throw new Error("Vault state PDA not found")
       }
-      // @ts-expect-error
       const tx = await program.methods
         .lock(new BN(vault.vaultId))
         .accounts({
           owner: wallet.publicKey,
           vault: account,
           userState: userStatePda,
-        })
+        } as any)
         .rpc()
 
       return tx
@@ -162,14 +161,13 @@ export function useVaultProgramAccount() {
         throw new Error("Vault state PDA not found")
       }
 
- // @ts-expect-error
       const tx = await program.methods
         .unlock(new BN(vault.vaultId))
         .accounts({
           owner: wallet.publicKey,
           vault: account,
           userState: userStatePda,
-        })
+        } as any)
         .rpc()
 
       return tx
